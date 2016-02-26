@@ -2,16 +2,16 @@ package sample.Figures;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Point{
-    protected int x;
-    protected int y;
+public class Point {
+    protected double x;
+    protected double y;
 
     public Point() {
         x = 0;
         y = 0;
     }
 
-    public Point(int x, int y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -34,13 +34,13 @@ public class Point{
         return div(summ(first, second), 2);
     }
 
-    public static Point mul(Point point, int multiplier) {
+    public static Point mul(Point point, double multiplier) {
         point.x *= multiplier;
         point.y *= multiplier;
         return point;
     }
 
-    public static Point div(Point point, int divisor) {
+    public static Point div(Point point, double divisor) {
         point.x /= divisor;
         point.y /= divisor;
         return point;
@@ -58,32 +58,52 @@ public class Point{
         return div(summ(coordinatesArray), coordinatesArray.length);
     }
 
-    public static double getLength(Point first,Point second){
-        Point result=diff(first,second);
-        return Math.sqrt(result.x*result.x+result.y*result.y);
+    public static double getLength(Point first, Point second) {
+        Point result = diff(first, second);
+        return Math.sqrt(result.x * result.x + result.y * result.y);
     }
 
-    public Point addX(int x){
-        this.x+=x;
-        return this;
-    }
-    public Point addY(int y){
-        this.y+=y;
-        return this;
-    }
-    public Point addXY(int x,int y){
-        this.x+=x;
-        this.y+=y;
+    public Point addX(double x) {
+        this.x += x;
         return this;
     }
 
-    public int getY(){
+    public Point addY(double y) {
+        this.y += y;
+        return this;
+    }
+
+    public Point addXY(double x, double y) {
+        this.x += x;
+        this.y += y;
+        return this;
+    }
+
+    public double getY() {
         return this.y;
     }
-    public int getX(){
+
+    public double getX() {
         return this.x;
     }
+
     public void draw(GraphicsContext graphicsContext) {
 
     }
+
+    public static double[] getXArray(Point[] points) {
+        double[] result = new double[points.length];
+        for (int i = 0; i < points.length; i++) {
+            result[i] = points[i].getX();
+        }
+        return result;
+    }
+    public static double[] getYArray(Point[] points) {
+        double[] result = new double[points.length];
+        for (int i = 0; i < points.length; i++) {
+            result[i] = points[i].getY();
+        }
+        return result;
+    }
+
 }

@@ -12,6 +12,6 @@ public class Polygon extends Shape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
-
+        graphicsContext.fillPolygon(Point.getXArray(points),Point.getYArray(points),points.length);
     }
 }

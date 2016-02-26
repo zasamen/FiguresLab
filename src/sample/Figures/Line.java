@@ -10,6 +10,6 @@ public class Line extends Shape {
         this.lastPoint=lastPoint;
     }
     public void draw(GraphicsContext graphicsContext){
-
+        graphicsContext.strokeLine(firstPoint.getX(),firstPoint.getY(),lastPoint.getX(),lastPoint.getY());
     }
 }

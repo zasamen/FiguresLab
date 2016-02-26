@@ -4,10 +4,10 @@ package sample.Figures;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Rectangle extends Shape {
-    protected int side;
-    protected int otherSide;
+    protected double side;
+    protected double otherSide;
 
-    public Rectangle(Point firstPoint,int side,int otherSide){
+    public Rectangle(Point firstPoint,double side,double otherSide){
         super(firstPoint);
         this.side=side;
         this.otherSide=otherSide;
@@ -15,6 +15,6 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
-
+        graphicsContext.fillRect(this.firstPoint.getX(),this.firstPoint.getY(),side,otherSide);
     }
 }

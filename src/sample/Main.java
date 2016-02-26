@@ -13,14 +13,16 @@ import java.util.LinkedList;
 public class Main extends Application {
     BorderPane root;
     Scene scene;
+    GraphicsContext buferGraphicsContext;
 
-    private static int side;
-    private static int otherSide;
+
     public static Point startDraw;
 
     static LinkedList<Shape> linkedList;
 
     static {
+        int side;
+        int otherSide;
         startDraw = new Point(20,20);
         side=30;
         otherSide=60;
@@ -41,13 +43,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         root = new BorderPane();
-
-        Canvas canvas = new Canvas(300, 500);
+        Canvas canvas = new Canvas(500, 500);
         root.setCenter(canvas);
+
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+        buferGraphicsContext=canvas.getGraphicsContext2D();
         drawShapes(graphicsContext);
 
-        scene = new Scene(root, 300, 300);
+
+        scene = new Scene(root, 300, 500);
         primaryStage.setTitle("Drower");
         primaryStage.setScene(scene);
         primaryStage.show();
