@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import sample.Figures.*;
 
@@ -47,7 +48,7 @@ public class Main extends Application {
         root.setCenter(canvas);
 
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        buferGraphicsContext=canvas.getGraphicsContext2D();
+        graphicsContext.setFill(Paint.valueOf("red"));
         drawShapes(graphicsContext);
 
 
@@ -66,7 +67,7 @@ public class Main extends Application {
         int i = linkedList.size();
         while (i-- > 0) {
             linkedList.pop().draw(graphicsContext);
-        }
+            graphicsContext.restore();}
     }
 
 }
