@@ -16,8 +16,8 @@ import sample.Figures.*;
 import java.util.LinkedList;
 
 public class Main extends Application {
-    static LinkedList<Shape> linkedList;
 
+    static LinkedList<Shape> linkedList;
     static {
         Point startDraw;
         int side;
@@ -50,17 +50,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        root = new BorderPane();
+        BorderPane root = new BorderPane();
         FlowPane buttonsPane = setFlowPaneComponents();
-        root.setRight(buttonsPane);
+        root.setTop(buttonsPane);
         scene = new Scene(root, 800, 600);
         Canvas canvas = new Canvas(root.getHeight() - buttonsPane.getHeight(),
                 root.getWidth() - buttonsPane.getWidth());
         root.setCenter(canvas);
 
-
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        graphicsContext.setFill(Paint.valueOf("red"));
+        graphicsContext.setStroke(Paint.valueOf("red"));
         drawShapes(graphicsContext);
 
         primaryStage.setTitle("Графический редактор \"ЛАБА1.2\"");
@@ -77,21 +76,15 @@ public class Main extends Application {
     }
 
     private FlowPane setFlowPaneComponents() {
-        FlowPane flowPane = new FlowPane(Orientation.VERTICAL, hgap, vgap);
-        flowPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("silver"), CornerRadii.EMPTY, Insets.EMPTY)));
+        FlowPane flowPane = new FlowPane(Orientation.HORIZONTAL, hgap, vgap);
+        flowPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("Aqua"), CornerRadii.EMPTY, Insets.EMPTY)));
         flowPane.setAlignment(Pos.TOP_CENTER);
         Button buttonLine = new Button("Линия");
-        buttonLine.setBackground(flowPane.getBackground());
         Button buttonCircle = new Button("Круг");
-        buttonCircle.setBorder(Border.EMPTY);
         Button buttonEllipse = new Button("Эллипс");
-        buttonEllipse.setBorder(Border.EMPTY);
         Button buttonSquare = new Button("Квадрат");
-        buttonSquare.setBorder(Border.EMPTY);
         Button buttonRectangle = new Button("Прямоугольник");
-        buttonRectangle.setBorder(Border.EMPTY);
         Button buttonPolygon = new Button("Многоугольник");
-        buttonPolygon.setBorder(Border.EMPTY);
         flowPane.getChildren().addAll(buttonCircle, buttonEllipse, buttonLine, buttonPolygon, buttonRectangle, buttonSquare);
         return flowPane;
     }
