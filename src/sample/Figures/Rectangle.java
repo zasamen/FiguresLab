@@ -2,12 +2,13 @@ package sample.Figures;
 
 
 import javafx.scene.canvas.GraphicsContext;
+import sample.Point;
 
 public class Rectangle extends Shape {
     protected double side;
     protected double otherSide;
 
-    public Rectangle(Point firstPoint,double side,double otherSide){
+    public Rectangle(Point firstPoint, double side, double otherSide) {
         super(firstPoint);
         this.side=side;
         this.otherSide=otherSide;

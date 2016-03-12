@@ -1,6 +1,7 @@
 package sample.Figures;
 
 import javafx.scene.canvas.GraphicsContext;
+import sample.Point;
 
 public class Polygon extends Shape {
     private Point[] points;

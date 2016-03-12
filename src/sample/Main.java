@@ -39,6 +39,8 @@ public class Main extends Application {
         linkedList.add(new Circle(startDraw, side));
     }
 
+    LinkedList<Button> buttonList;
+
     private double hgap = 5;
     private double vgap = 5;
     private BorderPane root;
@@ -88,5 +90,6 @@ public class Main extends Application {
         flowPane.getChildren().addAll(buttonCircle, buttonEllipse, buttonLine, buttonPolygon, buttonRectangle, buttonSquare);
         return flowPane;
     }
+
 
 }

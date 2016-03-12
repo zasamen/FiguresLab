@@ -1,4 +1,4 @@
-package sample.Figures;
+package sample;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -63,6 +63,22 @@ public class Point {
         return Math.sqrt(result.x * result.x + result.y * result.y);
     }
 
+    public static double[] getXArray(Point[] points) {
+        double[] result = new double[points.length];
+        for (int i = 0; i < points.length; i++) {
+            result[i] = points[i].getX();
+        }
+        return result;
+    }
+
+    public static double[] getYArray(Point[] points) {
+        double[] result = new double[points.length];
+        for (int i = 0; i < points.length; i++) {
+            result[i] = points[i].getY();
+        }
+        return result;
+    }
+
     public Point addX(double x) {
         this.x += x;
         return this;
@@ -89,21 +105,6 @@ public class Point {
 
     public void draw(GraphicsContext graphicsContext) {
 
-    }
-
-    public static double[] getXArray(Point[] points) {
-        double[] result = new double[points.length];
-        for (int i = 0; i < points.length; i++) {
-            result[i] = points[i].getX();
-        }
-        return result;
-    }
-    public static double[] getYArray(Point[] points) {
-        double[] result = new double[points.length];
-        for (int i = 0; i < points.length; i++) {
-            result[i] = points[i].getY();
-        }
-        return result;
     }
 
 }

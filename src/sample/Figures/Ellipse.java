@@ -1,6 +1,7 @@
 package sample.Figures;
 
 import javafx.scene.canvas.GraphicsContext;
+import sample.Point;
 
 public class Ellipse extends Shape {
     protected double radius;
