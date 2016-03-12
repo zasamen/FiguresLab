@@ -4,9 +4,12 @@ import javafx.scene.canvas.GraphicsContext;
 import sample.Point;
 
 public class Ellipse extends Shape {
+    static {
+        name = "Эллипс";
+    }
+
     protected double radius;
     protected double otherRadius;
-
     public Ellipse(Point firstPoint, double radius, double otherRadius) {
         super(firstPoint);
         this.radius = radius;

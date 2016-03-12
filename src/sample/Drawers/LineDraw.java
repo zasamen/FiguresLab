@@ -6,17 +6,19 @@ import sample.Point;
 
 public class LineDraw extends ShapeDraw {
 
-    protected Point point;
     protected Point otherPoint;
 
     public LineDraw(Point point) {
-        this.point = point;
-        otherPoint = point;
+        this.point = otherPoint = point;
     }
 
-    public LineDraw(Point point, Point otherPoint) {
+    public LineDraw(Point point, Point point2) {
         this.point = point;
-        this.otherPoint = otherPoint;
+        this.otherPoint = point2;
+    }
+
+    public LineDraw(LineDraw lineDraw, Point point) {
+        this(lineDraw.point, point);
     }
 
     @Override

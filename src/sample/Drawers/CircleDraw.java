@@ -4,19 +4,21 @@ import sample.Figures.Circle;
 import sample.Figures.Shape;
 import sample.Point;
 
-public class CircleDraw extends ShapeDraw {
+public class CircleDraw extends EllipseDraw {
 
     protected Point otherPoint;
 
     public CircleDraw(Point point) {
-        this.point = point;
+        super(point);
     }
 
     public CircleDraw(Point point, Point point2) {
-        this.point = point;
-        this.otherPoint = point2;
+        super(point, point2);
     }
 
+    public CircleDraw(CircleDraw circleDraw, Point point) {
+        super(circleDraw.point, point);
+    }
 
     @Override
     public Shape getShape() {

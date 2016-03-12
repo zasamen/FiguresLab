@@ -2,7 +2,6 @@ package sample;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -11,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import sample.Drawers.*;
 import sample.Figures.*;
 
 import java.util.LinkedList;
@@ -18,13 +18,11 @@ import java.util.LinkedList;
 public class Main extends Application {
 
     static LinkedList<Shape> linkedList;
+
     static {
-        Point startDraw;
-        int side;
-        int otherSide;
-        startDraw = new Point(20, 20);
-        side = 30;
-        otherSide = 60;
+        Point startDraw = new Point(20, 20);
+        int side = 30;
+        int otherSide = 60;
         linkedList = new LinkedList<>();
         linkedList.add(new Line(startDraw, startDraw.addXY(side, otherSide)));
         startDraw.addXY(side, -otherSide);
@@ -40,11 +38,9 @@ public class Main extends Application {
     }
 
     LinkedList<Button> buttonList;
-
-    private double hgap = 5;
-    private double vgap = 5;
-    private BorderPane root;
-    private Scene scene;
+    private Insets toolbarInsets = new Insets(5, 5, 5, 5);
+    private boolean drawing = false;
+    private Drawable drawUnit;
 
     public static void main(String[] args) {
         launch(args);
@@ -52,12 +48,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        BorderPane root = new BorderPane();
-        FlowPane buttonsPane = setFlowPaneComponents();
-        root.setTop(buttonsPane);
+        Scene scene;
+        BorderPane root;
+        root = new BorderPane();
+        HBox buttonsHBox = setHBoxComponents();
+        root.setTop(buttonsHBox);
         scene = new Scene(root, 800, 600);
-        Canvas canvas = new Canvas(root.getHeight() - buttonsPane.getHeight(),
-                root.getWidth() - buttonsPane.getWidth());
+        Canvas canvas = new Canvas(root.getHeight() - buttonsHBox.getHeight(),
+                root.getWidth() - buttonsHBox.getWidth());
         root.setCenter(canvas);
 
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
@@ -77,19 +75,35 @@ public class Main extends Application {
         }
     }
 
-    private FlowPane setFlowPaneComponents() {
-        FlowPane flowPane = new FlowPane(Orientation.HORIZONTAL, hgap, vgap);
-        flowPane.setBackground(new Background(new BackgroundFill(Paint.valueOf("Aqua"), CornerRadii.EMPTY, Insets.EMPTY)));
-        flowPane.setAlignment(Pos.TOP_CENTER);
+    private HBox setHBoxComponents() {
+        HBox hBox = new HBox();
+        hBox.setPadding(toolbarInsets);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setBackground(new Background(new BackgroundFill(Paint.valueOf("LightSkyBlue"), CornerRadii.EMPTY, Insets.EMPTY)));
         Button buttonLine = new Button("Линия");
         Button buttonCircle = new Button("Круг");
         Button buttonEllipse = new Button("Эллипс");
         Button buttonSquare = new Button("Квадрат");
         Button buttonRectangle = new Button("Прямоугольник");
         Button buttonPolygon = new Button("Многоугольник");
-        flowPane.getChildren().addAll(buttonCircle, buttonEllipse, buttonLine, buttonPolygon, buttonRectangle, buttonSquare);
-        return flowPane;
+        hBox.getChildren().addAll(buttonCircle, buttonEllipse, buttonLine, buttonPolygon, buttonRectangle, buttonSquare);
+        return hBox;
     }
 
+    private LinkedList<Button> initializeButtonList() {
+        LinkedList<Button> linkedList = new LinkedList<>();
 
+        return new LinkedList<>(buttonList);
+    }
+
+    private LinkedList<Class<? extends ShapeDraw>> initializeDrawableList() {
+        LinkedList<Class<? extends ShapeDraw>> linkedList = new LinkedList<>();
+        linkedList.add(CircleDraw.class);
+        linkedList.add(EllipseDraw.class);
+        linkedList.add(LineDraw.class);
+        linkedList.add(PolygonDraw.class);
+        linkedList.add(RectangleDraw.class);
+        linkedList.add(SquareDraw.class);
+        return linkedList;
+    }
 }

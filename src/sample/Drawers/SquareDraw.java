@@ -14,6 +14,10 @@ public class SquareDraw extends RectangleDraw {
         super(point, point2);
     }
 
+    public SquareDraw(SquareDraw squareDraw, Point point) {
+        super(squareDraw.point, point);
+    }
+
     @Override
     public Shape getShape() {
         Point side = Point.diff(otherPoint, point);

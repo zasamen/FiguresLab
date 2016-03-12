@@ -9,8 +9,7 @@ public class RectangleDraw extends ShapeDraw {
     protected Point otherPoint;
 
     public RectangleDraw(Point point) {
-        this.point = point;
-        this.otherPoint = point;
+        this.point = this.otherPoint = point;
     }
 
     public RectangleDraw(Point point, Point point2) {
@@ -18,6 +17,9 @@ public class RectangleDraw extends ShapeDraw {
         this.otherPoint = point2;
     }
 
+    public RectangleDraw(RectangleDraw rectangleDraw, Point point) {
+        this(rectangleDraw.point, point);
+    }
 
     @Override
     public Shape getShape() {

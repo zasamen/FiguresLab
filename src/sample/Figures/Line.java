@@ -4,12 +4,17 @@ import javafx.scene.canvas.GraphicsContext;
 import sample.Point;
 
 public class Line extends Shape {
+    static {
+        name = "Линия";
+    }
+
     protected Point lastPoint;
 
     public Line (Point firstPoint,Point lastPoint){
         super(firstPoint);
         this.lastPoint=lastPoint;
     }
+
     public void draw(GraphicsContext graphicsContext){
         graphicsContext.strokeLine(firstPoint.getX(),firstPoint.getY(),lastPoint.getX(),lastPoint.getY());
     }

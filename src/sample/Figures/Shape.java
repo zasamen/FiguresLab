@@ -1,17 +1,20 @@
 package sample.Figures;
 
-import javafx.scene.canvas.GraphicsContext;
 import sample.Point;
 
-public abstract class Shape {
+public abstract class Shape implements Drawable {
+    protected static String name = "Фигура";
     protected Point firstPoint;
 
-    Shape(Point firstPoint){
-        this.firstPoint=firstPoint;
+    Shape(Point firstPoint) {
+        this.firstPoint = firstPoint;
+    }
+
+    public static String getName() {
+        return name;
     }
 
     public Point getFirstPoint() {
         return firstPoint;
     }
-    public abstract void draw(GraphicsContext graphicsContext);
 }

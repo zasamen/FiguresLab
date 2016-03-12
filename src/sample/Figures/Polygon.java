@@ -4,8 +4,11 @@ import javafx.scene.canvas.GraphicsContext;
 import sample.Point;
 
 public class Polygon extends Shape {
-    private Point[] points;
+    static {
+        name = "Многоугольник";
+    }
 
+    private Point[] points;
     public Polygon(Point[] points){
         super(points[0]);
         this.points=points;

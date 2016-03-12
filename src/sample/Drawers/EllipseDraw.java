@@ -4,17 +4,20 @@ import sample.Figures.Ellipse;
 import sample.Figures.Shape;
 import sample.Point;
 
-public class EllipseDrawer extends ShapeDraw {
+public class EllipseDraw extends ShapeDraw {
     protected Point otherPoint;
 
-    public EllipseDrawer(Point point) {
-        this.otherPoint = point;
-        this.point = point;
+    public EllipseDraw(Point point) {
+        this.otherPoint = this.point = point;
     }
 
-    public EllipseDrawer(Point point, Point point2) {
+    public EllipseDraw(Point point, Point point2) {
         this.point = point;
         this.otherPoint = point2;
+    }
+
+    public EllipseDraw(EllipseDraw ellipseDrawer, Point point) {
+        this(ellipseDrawer.point, point);
     }
 
     @Override

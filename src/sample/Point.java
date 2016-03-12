@@ -1,8 +1,9 @@
 package sample;
 
 import javafx.scene.canvas.GraphicsContext;
+import sample.Figures.Drawable;
 
-public class Point {
+public class Point implements Drawable {
     protected double x;
     protected double y;
 
@@ -104,7 +105,7 @@ public class Point {
     }
 
     public void draw(GraphicsContext graphicsContext) {
-
+        graphicsContext.strokeLine(x, y, x, y);
     }
 
 }
