@@ -1,6 +1,4 @@
-package sample.Figures;
-
-import sample.Point;
+package sample.Shapes;
 
 public class Square extends Rectangle{
 

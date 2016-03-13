@@ -1,6 +1,4 @@
-package sample.Figures;
-
-import sample.Point;
+package sample.Shapes;
 
 public abstract class Shape implements Drawable {
     protected static String name = "Фигура";

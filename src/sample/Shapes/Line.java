@@ -1,7 +1,6 @@
-package sample.Figures;
+package sample.Shapes;
 
 import javafx.scene.canvas.GraphicsContext;
-import sample.Point;
 
 public class Line extends Shape {
     static {

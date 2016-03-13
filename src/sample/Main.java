@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import sample.Drawers.*;
-import sample.Figures.*;
+import sample.Adapters.*;
+import sample.Shapes.*;
 
 import java.util.LinkedList;
 
@@ -96,14 +96,14 @@ public class Main extends Application {
         return new LinkedList<>(buttonList);
     }
 
-    private LinkedList<Class<? extends ShapeDraw>> initializeDrawableList() {
-        LinkedList<Class<? extends ShapeDraw>> linkedList = new LinkedList<>();
-        linkedList.add(CircleDraw.class);
-        linkedList.add(EllipseDraw.class);
-        linkedList.add(LineDraw.class);
-        linkedList.add(PolygonDraw.class);
-        linkedList.add(RectangleDraw.class);
-        linkedList.add(SquareDraw.class);
+    private LinkedList<Class<? extends ShapeAdapter>> initializeDrawableList() {
+        LinkedList<Class<? extends ShapeAdapter>> linkedList = new LinkedList<>();
+        linkedList.add(CircleAdapter.class);
+        linkedList.add(EllipseAdapter.class);
+        linkedList.add(LineAdapter.class);
+        linkedList.add(PolygonAdapter.class);
+        linkedList.add(RectangleAdapter.class);
+        linkedList.add(SquareAdapter.class);
         return linkedList;
     }
 }

@@ -1,7 +1,6 @@
-package sample;
+package sample.Shapes;
 
 import javafx.scene.canvas.GraphicsContext;
-import sample.Figures.Drawable;
 
 public class Point implements Drawable {
     protected double x;

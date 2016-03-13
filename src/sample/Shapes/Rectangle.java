@@ -1,8 +1,7 @@
-package sample.Figures;
+package sample.Shapes;
 
 
 import javafx.scene.canvas.GraphicsContext;
-import sample.Point;
 
 public class Rectangle extends Shape {
     static {
