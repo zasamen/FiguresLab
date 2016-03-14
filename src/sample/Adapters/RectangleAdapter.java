@@ -2,28 +2,26 @@ package sample.Adapters;
 
 import sample.Shapes.Point;
 import sample.Shapes.Rectangle;
-import sample.Shapes.Shape;
 
 public class RectangleAdapter extends ShapeAdapter {
 
     protected Point otherPoint;
 
-    public RectangleAdapter(Point point) {
-        this.point = this.otherPoint = point;
-    }
-
-    public RectangleAdapter(Point point, Point point2) {
-        this.point = point;
-        this.otherPoint = point2;
-    }
-
-    public RectangleAdapter(RectangleAdapter rectangleAdapter, Point point) {
-        this(rectangleAdapter.point, point);
+    @Override
+    public void manageOtherPoint(Point point) {
+        otherPoint = point;
+        createShape();
     }
 
     @Override
-    public Shape getShapeToDraw() {
+    public Point[] getPoints() {
+        return new Point[]{point, otherPoint};
+    }
+
+
+    @Override
+    protected void createShape() {
         Point shapeHeightAndWidth = Point.diff(otherPoint, point);
-        return new Rectangle(point, shapeHeightAndWidth.getX(), shapeHeightAndWidth.getY());
+        shape = new Rectangle(point, shapeHeightAndWidth.getX(), shapeHeightAndWidth.getY());
     }
 }

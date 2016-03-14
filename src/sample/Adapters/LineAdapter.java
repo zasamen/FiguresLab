@@ -2,27 +2,24 @@ package sample.Adapters;
 
 import sample.Shapes.Line;
 import sample.Shapes.Point;
-import sample.Shapes.Shape;
 
 public class LineAdapter extends ShapeAdapter {
 
     protected Point otherPoint;
 
-    public LineAdapter(Point point) {
-        this.point = otherPoint = point;
-    }
-
-    public LineAdapter(Point point, Point point2) {
-        this.point = point;
-        this.otherPoint = point2;
-    }
-
-    public LineAdapter(LineAdapter lineAdapter, Point point) {
-        this(lineAdapter.point, point);
+    @Override
+    public void manageOtherPoint(Point point) {
+        this.otherPoint = point;
+        createShape();
     }
 
     @Override
-    public Shape getShapeToDraw() {
-        return new Line(point, otherPoint);
+    public Point[] getPoints() {
+        return new Point[]{point, otherPoint};
+    }
+
+    @Override
+    protected void createShape() {
+        shape = new Line(point, otherPoint);
     }
 }

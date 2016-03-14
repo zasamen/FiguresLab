@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import sample.Adapters.*;
 import sample.Shapes.*;
 
 import java.util.LinkedList;
@@ -81,6 +80,9 @@ public class Main extends Application {
         hBox.setAlignment(Pos.CENTER);
         hBox.setBackground(new Background(new BackgroundFill(Paint.valueOf("LightSkyBlue"), CornerRadii.EMPTY, Insets.EMPTY)));
         Button buttonLine = new Button("Линия");
+        buttonLine.setOnMouseClicked(event -> {
+
+        });
         Button buttonCircle = new Button("Круг");
         Button buttonEllipse = new Button("Эллипс");
         Button buttonSquare = new Button("Квадрат");
@@ -90,20 +92,5 @@ public class Main extends Application {
         return hBox;
     }
 
-    private LinkedList<Button> initializeButtonList() {
-        LinkedList<Button> linkedList = new LinkedList<>();
 
-        return new LinkedList<>(buttonList);
-    }
-
-    private LinkedList<Class<? extends ShapeAdapter>> initializeDrawableList() {
-        LinkedList<Class<? extends ShapeAdapter>> linkedList = new LinkedList<>();
-        linkedList.add(CircleAdapter.class);
-        linkedList.add(EllipseAdapter.class);
-        linkedList.add(LineAdapter.class);
-        linkedList.add(PolygonAdapter.class);
-        linkedList.add(RectangleAdapter.class);
-        linkedList.add(SquareAdapter.class);
-        return linkedList;
-    }
 }

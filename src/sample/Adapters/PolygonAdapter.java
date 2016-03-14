@@ -2,28 +2,35 @@ package sample.Adapters;
 
 import sample.Shapes.Point;
 import sample.Shapes.Polygon;
-import sample.Shapes.Shape;
 
 public class PolygonAdapter extends ShapeAdapter {
     protected Point[] points;
 
-    public PolygonAdapter(Point... points) {
-        this.points = new Point[points.length];
-        System.arraycopy(points, 0, this.points, 0, points.length);
-    }
-
-    public PolygonAdapter(Point[] points, Point... newPoints) {
-        this.points = new Point[points.length + newPoints.length];
-        System.arraycopy(points, 0, this.points, 0, points.length);
-        System.arraycopy(newPoints, 0, this.points, this.points.length, newPoints.length);
-    }
-
-    public PolygonAdapter(PolygonAdapter polygonAdapter, Point point) {
-        this(polygonAdapter.points, point);
+    @Override
+    public void setFirstPoint(Point point) {
+        if (points != null) {
+            points[0] = point;
+        } else {
+            points = new Point[]{point};
+        }
     }
 
     @Override
-    public Shape getShapeToDraw() {
-        return new Polygon(points);
+    public void manageOtherPoint(Point point) {
+        Point[] points = new Point[this.points.length + 1];
+        System.arraycopy(this.points, 0, points, 0, this.points.length);
+        this.points = points;
+        this.points[points.length - 1] = point;
+        createShape();
+    }
+
+    @Override
+    public Point[] getPoints() {
+        return points;
+    }
+
+    @Override
+    protected void createShape() {
+        shape = new Polygon(points);
     }
 }
