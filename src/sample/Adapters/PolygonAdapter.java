@@ -34,11 +34,6 @@ public class PolygonAdapter extends ShapeAdapter {
     }
 
     @Override
-    public Point[] getPoints() {
-        return points;
-    }
-
-    @Override
     protected void createShape() {
         drawable = new Polygon(points);
     }

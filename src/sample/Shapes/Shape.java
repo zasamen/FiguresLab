@@ -8,11 +8,4 @@ public abstract class Shape implements Drawable {
         this.firstPoint = firstPoint;
     }
 
-    public static String getName() {
-        return name;
-    }
-
-    public Point getFirstPoint() {
-        return firstPoint;
-    }
 }

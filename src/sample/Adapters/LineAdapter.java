@@ -18,10 +18,6 @@ public class LineAdapter extends ShapeAdapter {
         this.otherPoint = point;
     }
 
-    @Override
-    public Point[] getPoints() {
-        return new Point[]{point, otherPoint};
-    }
 
     @Override
     protected void createShape() {

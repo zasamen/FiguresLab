@@ -10,10 +10,6 @@ public class Drawer extends Canvas {
     List<Drawable> shapeList = new LinkedList<>();
     DrawTool drawTool;
 
-    public Drawer() {
-        super(0, 0);
-    }
-
     public Drawer(double width, double height) {
         super(width, height);
     }

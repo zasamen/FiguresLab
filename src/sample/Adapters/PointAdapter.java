@@ -14,8 +14,4 @@ public class PointAdapter extends ShapeAdapter {
 
     }
 
-    @Override
-    public Point[] getPoints() {
-        return new Point[]{point};
-    }
 }

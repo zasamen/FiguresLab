@@ -13,8 +13,6 @@ public abstract class ShapeAdapter {
 
     public abstract void manageOtherPoint(Point point);
 
-    public abstract Point[] getPoints();
-
     public void resetLastPoint(Point point) {
     }
 

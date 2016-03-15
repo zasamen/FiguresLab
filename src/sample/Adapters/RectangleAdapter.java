@@ -20,12 +20,6 @@ public class RectangleAdapter extends ShapeAdapter {
     }
 
     @Override
-    public Point[] getPoints() {
-        return new Point[]{point, otherPoint};
-    }
-
-
-    @Override
     protected void createShape() {
         double side = Math.abs(point.getX() - otherPoint.getX());
         double otherSide = Math.abs(point.getY() - otherPoint.getY());

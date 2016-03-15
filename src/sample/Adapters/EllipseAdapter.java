@@ -17,11 +17,6 @@ public class EllipseAdapter extends ShapeAdapter {
     }
 
     @Override
-    public Point[] getPoints() {
-        return new Point[]{point, otherPoint};
-    }
-
-    @Override
     protected void createShape() {
         double diameter = Math.abs(point.getX() - otherPoint.getX());
         double otherDiameter = Math.abs(point.getY() - otherPoint.getY());
