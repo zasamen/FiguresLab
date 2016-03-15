@@ -4,7 +4,7 @@ import sample.Shapes.Point;
 import sample.Shapes.Polygon;
 
 public class PolygonAdapter extends ShapeAdapter {
-    protected Point[] points;
+    protected Point[] points = new Point[]{new Point()};
 
     @Override
     public void setFirstPoint(Point point) {
@@ -21,7 +21,16 @@ public class PolygonAdapter extends ShapeAdapter {
         System.arraycopy(this.points, 0, points, 0, this.points.length);
         this.points = points;
         this.points[points.length - 1] = point;
-        createShape();
+    }
+
+    @Override
+    public void resetLastPoint(Point point) {
+        points[points.length - 1] = point;
+    }
+
+    @Override
+    public void resetLastPoint() {
+        points[points.length - 1] = points[0];
     }
 
     @Override
@@ -31,6 +40,6 @@ public class PolygonAdapter extends ShapeAdapter {
 
     @Override
     protected void createShape() {
-        shape = new Polygon(points);
+        drawable = new Polygon(points);
     }
 }

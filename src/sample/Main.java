@@ -4,12 +4,14 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.Contract;
+import sample.Adapters.*;
+import sample.DrawerTools.*;
 import sample.Shapes.*;
 
 import java.util.LinkedList;
@@ -36,10 +38,8 @@ public class Main extends Application {
         linkedList.add(new Circle(startDraw, side));
     }
 
-    LinkedList<Button> buttonList;
+    Drawer drawer;
     private Insets toolbarInsets = new Insets(5, 5, 5, 5);
-    private boolean drawing = false;
-    private Drawable drawUnit;
 
     public static void main(String[] args) {
         launch(args);
@@ -53,11 +53,11 @@ public class Main extends Application {
         HBox buttonsHBox = setHBoxComponents();
         root.setTop(buttonsHBox);
         scene = new Scene(root, 800, 600);
-        Canvas canvas = new Canvas(root.getHeight() - buttonsHBox.getHeight(),
+        drawer = new Drawer(root.getHeight() - buttonsHBox.getHeight(),
                 root.getWidth() - buttonsHBox.getWidth());
-        root.setCenter(canvas);
+        root.setCenter(drawer);
 
-        GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
+        GraphicsContext graphicsContext = drawer.getGraphicsContext2D();
         graphicsContext.setStroke(Paint.valueOf("red"));
         drawShapes(graphicsContext);
 
@@ -79,16 +79,88 @@ public class Main extends Application {
         hBox.setPadding(toolbarInsets);
         hBox.setAlignment(Pos.CENTER);
         hBox.setBackground(new Background(new BackgroundFill(Paint.valueOf("LightSkyBlue"), CornerRadii.EMPTY, Insets.EMPTY)));
-        Button buttonLine = new Button("Линия");
-        buttonLine.setOnMouseClicked(event -> {
 
+        ShapeButton buttonLine = new ShapeButton("Линия") {
+            @Contract(" -> !null")
+            @Override
+            public ShapeAdapter getShapeAdapter() {
+                return new LineAdapter();
+            }
+        };
+        buttonLine.setOnMouseClicked(event -> {
+            drawer.setDrawTool(new TwoPointShapeDrawTool(drawer));
+            drawer.getDrawTool().setShapeButton(buttonLine);
         });
-        Button buttonCircle = new Button("Круг");
-        Button buttonEllipse = new Button("Эллипс");
-        Button buttonSquare = new Button("Квадрат");
-        Button buttonRectangle = new Button("Прямоугольник");
-        Button buttonPolygon = new Button("Многоугольник");
-        hBox.getChildren().addAll(buttonCircle, buttonEllipse, buttonLine, buttonPolygon, buttonRectangle, buttonSquare);
+        ShapeButton buttonCircle = new ShapeButton("Круг") {
+            @Contract(" -> !null")
+            @Override
+            public ShapeAdapter getShapeAdapter() {
+                return new CircleAdapter();
+            }
+        };
+        buttonCircle.setOnMouseClicked(event -> {
+            drawer.setDrawTool(new TwoPointShapeDrawTool(drawer));
+            drawer.getDrawTool().setShapeButton(buttonCircle);
+        });
+        ShapeButton buttonEllipse = new ShapeButton("Эллипс") {
+            @Contract(" -> !null")
+            @Override
+            public ShapeAdapter getShapeAdapter() {
+                return new EllipseAdapter();
+            }
+        };
+        buttonEllipse.setOnAction(event1 -> {
+            drawer.setDrawTool(new TwoPointShapeDrawTool(drawer));
+            drawer.getDrawTool().setShapeButton(buttonEllipse);
+        });
+        ShapeButton buttonSquare = new ShapeButton("Квадрат") {
+            @Contract(" -> !null")
+            @Override
+            public ShapeAdapter getShapeAdapter() {
+                return new SquareAdapter();
+            }
+        };
+        buttonSquare.setOnMouseClicked(event -> {
+            drawer.setDrawTool(new TwoPointShapeDrawTool(drawer));
+            drawer.getDrawTool().setShapeButton(buttonSquare);
+        });
+        ShapeButton buttonRectangle = new ShapeButton("Прямоугольник") {
+            @Contract(" -> !null")
+            @Override
+            public ShapeAdapter getShapeAdapter() {
+                return new RectangleAdapter();
+            }
+        };
+        buttonRectangle.setOnAction(event -> {
+            drawer.setDrawTool(new TwoPointShapeDrawTool(drawer));
+            drawer.getDrawTool().setShapeButton(buttonRectangle);
+        });
+        ShapeButton buttonPolygon = new ShapeButton("Многоугольник") {
+            @Contract(" -> !null")
+            @Override
+            public ShapeAdapter getShapeAdapter() {
+                return new PolygonAdapter();
+            }
+        };
+        buttonPolygon.setOnAction(event -> {
+            drawer.setDrawTool(new MultyPointShapeDrawTool(drawer));
+            drawer.getDrawTool().setShapeButton(buttonPolygon);
+        });
+        ShapeButton buttonPoint = new ShapeButton("Точка") {
+            @Contract(" -> !null")
+            @Override
+            public ShapeAdapter getShapeAdapter() {
+                return new PointAdapter();
+            }
+        };
+        buttonPoint.setOnAction(event -> {
+            drawer.setDrawTool(new MonoPointShapeDrawTool(drawer));
+            drawer.getDrawTool().setShapeButton(buttonPoint);
+        });
+        Button buttonUndo = new Button("Отменить последнее");
+        buttonUndo.setOnAction(event -> drawer.removeLastShape());
+        hBox.getChildren().addAll(buttonCircle, buttonEllipse, buttonLine, buttonPolygon, buttonRectangle, buttonSquare,
+                buttonPoint, buttonUndo);
         return hBox;
     }
 

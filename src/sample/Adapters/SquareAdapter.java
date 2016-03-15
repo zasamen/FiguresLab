@@ -7,7 +7,10 @@ public class SquareAdapter extends RectangleAdapter {
 
     @Override
     protected void createShape() {
-        Point side = Point.diff(otherPoint, point);
-        shape = new Square(point, (side.getX() < side.getY()) ? side.getX() : side.getY());
+        double deltaX = Math.abs(point.getX() - otherPoint.getX());
+        double deltaY = Math.abs(point.getY() - otherPoint.getY());
+        double side = (deltaX < deltaY) ? deltaX : deltaY;
+        drawable = new Square(Point.getTopLeft(point, otherPoint, side, side), side);
     }
+
 }

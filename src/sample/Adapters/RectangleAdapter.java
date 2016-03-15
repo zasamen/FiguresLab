@@ -5,12 +5,18 @@ import sample.Shapes.Rectangle;
 
 public class RectangleAdapter extends ShapeAdapter {
 
-    protected Point otherPoint;
+    protected Point otherPoint = new Point();
 
     @Override
     public void manageOtherPoint(Point point) {
         otherPoint = point;
-        createShape();
+    }
+
+
+    @Override
+    public void setFirstPoint(Point point) {
+        otherPoint = point;
+        super.setFirstPoint(point);
     }
 
     @Override
@@ -21,7 +27,8 @@ public class RectangleAdapter extends ShapeAdapter {
 
     @Override
     protected void createShape() {
-        Point shapeHeightAndWidth = Point.diff(otherPoint, point);
-        shape = new Rectangle(point, shapeHeightAndWidth.getX(), shapeHeightAndWidth.getY());
+        double side = Math.abs(point.getX() - otherPoint.getX());
+        double otherSide = Math.abs(point.getY() - otherPoint.getY());
+        drawable = new Rectangle(Point.getTopLeft(point, otherPoint, side, otherSide), side, otherSide);
     }
 }

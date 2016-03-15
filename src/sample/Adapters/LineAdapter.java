@@ -8,9 +8,14 @@ public class LineAdapter extends ShapeAdapter {
     protected Point otherPoint;
 
     @Override
+    public void setFirstPoint(Point point) {
+        otherPoint = point;
+        super.setFirstPoint(point);
+    }
+
+    @Override
     public void manageOtherPoint(Point point) {
         this.otherPoint = point;
-        createShape();
     }
 
     @Override
@@ -20,6 +25,6 @@ public class LineAdapter extends ShapeAdapter {
 
     @Override
     protected void createShape() {
-        shape = new Line(point, otherPoint);
+        drawable = new Line(point, otherPoint);
     }
 }

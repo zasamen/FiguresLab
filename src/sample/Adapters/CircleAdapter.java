@@ -6,7 +6,9 @@ import sample.Shapes.Point;
 public class CircleAdapter extends EllipseAdapter {
     @Override
     protected void createShape() {
-        Point radius = Point.diff(otherPoint, point);
-        shape = new Circle(point, (radius.getX() < radius.getY()) ? radius.getX() : radius.getY());
+        double deltaX = Math.abs(point.getX() - otherPoint.getX());
+        double deltaY = Math.abs(point.getY() - otherPoint.getY());
+        double diameter = (deltaX < deltaY) ? deltaX : deltaY;
+        drawable = new Circle(Point.getTopLeft(point, otherPoint, diameter, diameter), diameter / 2);
     }
 }

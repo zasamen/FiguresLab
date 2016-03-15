@@ -1,31 +1,29 @@
 package sample.Adapters;
 
+import sample.Shapes.Drawable;
 import sample.Shapes.Point;
-import sample.Shapes.Shape;
 
 public abstract class ShapeAdapter {
-    protected Point point;
-    protected Shape shape;
-
-    public ShapeAdapter() {
-
-    }
-
-    public Point getFirstPoint() {
-        return point;
-    }
+    protected Point point = new Point(0, 0);
+    protected Drawable drawable;
 
     public void setFirstPoint(Point point) {
         this.point = point;
-        createShape();
     }
 
     public abstract void manageOtherPoint(Point point);
 
     public abstract Point[] getPoints();
 
-    public Shape getShape() {
-        return shape;
+    public void resetLastPoint(Point point) {
+    }
+
+    public void resetLastPoint() {
+    }
+
+    public Drawable getDrawable() {
+        createShape();
+        return drawable;
     }
 
     protected abstract void createShape();

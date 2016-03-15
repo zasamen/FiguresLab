@@ -4,12 +4,16 @@ import sample.Shapes.Ellipse;
 import sample.Shapes.Point;
 
 public class EllipseAdapter extends ShapeAdapter {
-    protected Point otherPoint;
+    protected Point otherPoint = point;
+
+    @Override
+    public void setFirstPoint(Point point) {
+        super.setFirstPoint(point);
+    }
 
     @Override
     public void manageOtherPoint(Point point) {
         this.otherPoint = point;
-        createShape();
     }
 
     @Override
@@ -19,7 +23,8 @@ public class EllipseAdapter extends ShapeAdapter {
 
     @Override
     protected void createShape() {
-        Point radios = Point.diff(otherPoint, point);
-        shape = new Ellipse(point, radios.getX(), radios.getY());
+        double diameter = Math.abs(point.getX() - otherPoint.getX());
+        double otherDiameter = Math.abs(point.getY() - otherPoint.getY());
+        drawable = new Ellipse(Point.getTopLeft(point, otherPoint, diameter, otherDiameter), diameter / 2, otherDiameter / 2);
     }
 }
