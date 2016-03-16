@@ -1,16 +1,18 @@
 package sample.Shapes;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Point implements Drawable {
     protected double x;
     protected double y;
+    protected Color color;
 
     public Point() {
         x = 0;
         y = 0;
     }
-
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
@@ -48,15 +50,14 @@ public class Point implements Drawable {
         }
     }
 
-    public Point addX(double x) {
-        this.x += x;
-        return this;
+    @Override
+    public void setFillColor(Color color) {
+
     }
 
-    public Point addXY(double x, double y) {
-        this.x += x;
-        this.y += y;
-        return this;
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public double getY() {
@@ -68,6 +69,7 @@ public class Point implements Drawable {
     }
 
     public void draw(GraphicsContext graphicsContext) {
+        graphicsContext.setStroke(Paint.valueOf(color.toString()));
         graphicsContext.strokeLine(x, y, x, y);
     }
 

@@ -1,9 +1,15 @@
 package sample.Adapters;
 
+import javafx.scene.paint.Color;
 import sample.Shapes.Circle;
 import sample.Shapes.Point;
 
 public class CircleAdapter extends EllipseAdapter {
+
+    public CircleAdapter(Color color, Color fillColor) {
+        super(color, fillColor);
+    }
+
     @Override
     protected void createShape() {
         double deltaX = Math.abs(point.getX() - otherPoint.getX());

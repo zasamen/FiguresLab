@@ -18,6 +18,8 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
+        super.draw(graphicsContext);
         graphicsContext.strokeRect(this.firstPoint.getX(), this.firstPoint.getY(), side, otherSide);
+        graphicsContext.fillRect(this.firstPoint.getX(), this.firstPoint.getY(), this.side, this.otherSide);
     }
 }

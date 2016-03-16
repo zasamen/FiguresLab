@@ -4,9 +4,10 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.Contract;
@@ -16,7 +17,9 @@ import sample.DrawerTools.*;
 public class Main extends Application {
 
     Drawer drawer;
-    private Insets toolbarInsets = new Insets(5, 5, 5, 5);
+    Color color = Color.BLACK;
+    Color fillColor = Color.TRANSPARENT;
+    private Insets paddingInsets = new Insets(5, 5, 5, 5);
 
     public static void main(String[] args) {
         launch(args);
@@ -27,14 +30,21 @@ public class Main extends Application {
         Scene scene;
         BorderPane root;
         root = new BorderPane();
+        scene = new Scene(root, 800, 600);
         HBox buttonsHBox = setHBoxComponents();
         root.setTop(buttonsHBox);
-        scene = new Scene(root, 800, 600);
-        drawer = new Drawer(root.getWidth(), root.getHeight() - buttonsHBox.getHeight());
+        ColorPicker colorPicker = new ColorPicker(Color.BLACK);
+        colorPicker.setOnAction(event -> color = colorPicker.getValue());
+        ColorPicker colorPickerFill = new ColorPicker(Color.TRANSPARENT);
+        colorPickerFill.setOnAction(event -> fillColor = colorPickerFill.getValue());
+        VBox colorVBox = new VBox();
+        root.setLeft(colorVBox);
+        colorVBox.getChildren().addAll(colorPicker, colorPickerFill);
+        drawer = new Drawer(root.getWidth() - colorVBox.getWidth(), root.getHeight() - buttonsHBox.getHeight());
         root.setCenter(drawer);
 
-        GraphicsContext graphicsContext = drawer.getGraphicsContext2D();
-        graphicsContext.setStroke(Paint.valueOf("red"));
+        root.widthProperty().addListener(observable1 -> drawer.setWidth(root.getWidth() - colorVBox.getWidth()));
+        root.heightProperty().addListener(observable -> drawer.setHeight(root.getHeight() - buttonsHBox.getHeight()));
 
         primaryStage.setTitle("Графический редактор \"ЛАБА1.2\"");
         primaryStage.setScene(scene);
@@ -43,7 +53,7 @@ public class Main extends Application {
 
     private HBox setHBoxComponents() {
         HBox hBox = new HBox();
-        hBox.setPadding(toolbarInsets);
+        hBox.setPadding(paddingInsets);
         hBox.setAlignment(Pos.CENTER);
         hBox.setBackground(new Background(new BackgroundFill(Paint.valueOf("LightSkyBlue"), CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -51,7 +61,7 @@ public class Main extends Application {
             @Contract(" -> !null")
             @Override
             public ShapeAdapter getShapeAdapter() {
-                return new LineAdapter();
+                return new LineAdapter(color, fillColor);
             }
         };
         buttonLine.setOnMouseClicked(event -> {
@@ -62,7 +72,7 @@ public class Main extends Application {
             @Contract(" -> !null")
             @Override
             public ShapeAdapter getShapeAdapter() {
-                return new CircleAdapter();
+                return new CircleAdapter(color, fillColor);
             }
         };
         buttonCircle.setOnMouseClicked(event -> {
@@ -73,7 +83,7 @@ public class Main extends Application {
             @Contract(" -> !null")
             @Override
             public ShapeAdapter getShapeAdapter() {
-                return new EllipseAdapter();
+                return new EllipseAdapter(color, fillColor);
             }
         };
         buttonEllipse.setOnAction(event1 -> {
@@ -84,7 +94,7 @@ public class Main extends Application {
             @Contract(" -> !null")
             @Override
             public ShapeAdapter getShapeAdapter() {
-                return new SquareAdapter();
+                return new SquareAdapter(color, fillColor);
             }
         };
         buttonSquare.setOnMouseClicked(event -> {
@@ -95,7 +105,7 @@ public class Main extends Application {
             @Contract(" -> !null")
             @Override
             public ShapeAdapter getShapeAdapter() {
-                return new RectangleAdapter();
+                return new RectangleAdapter(color, fillColor);
             }
         };
         buttonRectangle.setOnAction(event -> {
@@ -105,8 +115,10 @@ public class Main extends Application {
         ShapeButton buttonPolygon = new ShapeButton("Многоугольник") {
             @Contract(" -> !null")
             @Override
+
             public ShapeAdapter getShapeAdapter() {
-                return new PolygonAdapter();
+
+                return new PolygonAdapter(color, fillColor);
             }
         };
         buttonPolygon.setOnAction(event -> {
@@ -117,7 +129,7 @@ public class Main extends Application {
             @Contract(" -> !null")
             @Override
             public ShapeAdapter getShapeAdapter() {
-                return new PointAdapter();
+                return new PointAdapter(color, fillColor);
             }
         };
         buttonPoint.setOnAction(event -> {

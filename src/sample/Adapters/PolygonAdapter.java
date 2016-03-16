@@ -1,11 +1,15 @@
 package sample.Adapters;
 
+import javafx.scene.paint.Color;
 import sample.Shapes.Point;
 import sample.Shapes.Polygon;
 
 public class PolygonAdapter extends ShapeAdapter {
     protected Point[] points = new Point[]{new Point()};
 
+    public PolygonAdapter(Color color, Color fillColor) {
+        super(color, fillColor);
+    }
     @Override
     public void setFirstPoint(Point point) {
         if (points != null) {

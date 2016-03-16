@@ -16,7 +16,9 @@ public class Ellipse extends Shape {
     }
 
     public void draw(GraphicsContext graphicsContext) {
+        super.draw(graphicsContext);
         graphicsContext.strokeOval(this.firstPoint.getX(), this.firstPoint.getY(), 2 * radius, 2 * otherRadius);
+        graphicsContext.fillOval(this.firstPoint.getX(), this.firstPoint.getY(), 2 * radius, 2 * otherRadius);
     }
 
 }

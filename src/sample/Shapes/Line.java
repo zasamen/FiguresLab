@@ -15,6 +15,7 @@ public class Line extends Shape {
     }
 
     public void draw(GraphicsContext graphicsContext){
+        super.draw(graphicsContext);
         graphicsContext.strokeLine(firstPoint.getX(),firstPoint.getY(),lastPoint.getX(),lastPoint.getY());
     }
 }

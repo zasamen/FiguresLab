@@ -1,10 +1,15 @@
 package sample.Adapters;
 
+import javafx.scene.paint.Color;
 import sample.Shapes.Ellipse;
 import sample.Shapes.Point;
 
 public class EllipseAdapter extends ShapeAdapter {
     protected Point otherPoint = point;
+
+    public EllipseAdapter(Color color, Color fillColor) {
+        super(color, fillColor);
+    }
 
     @Override
     public void setFirstPoint(Point point) {
